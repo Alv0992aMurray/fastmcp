@@ -1,59 +1,23 @@
-"""FastMCP - An ergonomic MCP interface."""
+"""FastMCP - A fast, Pythonic interface for the Model Context Protocol.
 
-import importlib
-import warnings
-from importlib.metadata import version as _version
-from typing import TYPE_CHECKING
+This is a fork of PrefectHQ/fastmcp with additional features and improvements.
+"""
 
-from fastmcp.settings import Settings
-from fastmcp.utilities.logging import configure_logging as _configure_logging
+from fastmcp.server import FastMCP
+from fastmcp.tools import tool
+from fastmcp.resources import resource
+from fastmcp.prompts import prompt
+from fastmcp.context import Context
+from fastmcp.exceptions import FastMCPError, ToolError, ResourceError
 
-if TYPE_CHECKING:
-    from fastmcp.client import Client as Client
-    from fastmcp.apps.app import FastMCPApp as FastMCPApp
-
-settings = Settings()
-if settings.log_enabled:
-    _configure_logging(
-        level=settings.log_level,
-        enable_rich_tracebacks=settings.enable_rich_tracebacks,
-    )
-
-from fastmcp.exceptions import FastMCPDeprecationWarning
-from fastmcp.server.server import FastMCP
-from fastmcp.server.context import Context
-import fastmcp.server
-
-__version__ = _version("fastmcp")
-
-if settings.deprecation_warnings:
-    warnings.simplefilter("default", FastMCPDeprecationWarning)
-
-
-# --- Lazy imports for performance (see #3292) ---
-# Client and the client submodule are deferred so that server-only users
-# don't pay for the client import chain. Do not convert back to top-level.
-
-
-def __getattr__(name: str) -> object:
-    if name == "Client":
-        from fastmcp.client import Client
-
-        return Client
-    if name == "FastMCPApp":
-        from fastmcp.apps.app import FastMCPApp
-
-        return FastMCPApp
-    if name == "client":
-        return importlib.import_module("fastmcp.client")
-    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
-
-
+__version__ = "0.1.0"
 __all__ = [
-    "Client",
-    "Context",
     "FastMCP",
-    "FastMCPApp",
-    "FastMCPDeprecationWarning",
-    "settings",
+    "tool",
+    "resource",
+    "prompt",
+    "Context",
+    "FastMCPError",
+    "ToolError",
+    "ResourceError",
 ]
