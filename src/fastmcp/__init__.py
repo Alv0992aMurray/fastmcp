@@ -5,6 +5,7 @@ This is a fork of PrefectHQ/fastmcp with additional features and improvements.
 Fork notes:
 - Tracking upstream: https://github.com/PrefectHQ/fastmcp
 - Added PromptError to public exceptions for consistency with ToolError/ResourceError
+- Exposed __version__ in __all__ for easier introspection
 """
 
 from fastmcp.server import FastMCP
@@ -25,4 +26,5 @@ __all__ = [
     "ToolError",
     "ResourceError",
     "PromptError",
+    "__version__",
 ]
