@@ -6,6 +6,7 @@ Fork notes:
 - Tracking upstream: https://github.com/PrefectHQ/fastmcp
 - Added PromptError to public exceptions for consistency with ToolError/ResourceError
 - Exposed __version__ in __all__ for easier introspection
+- Added __author__ for personal fork identification
 """
 
 from fastmcp.server import FastMCP
@@ -16,6 +17,7 @@ from fastmcp.context import Context
 from fastmcp.exceptions import FastMCPError, ToolError, ResourceError, PromptError
 
 __version__ = "0.1.0"
+__author__ = "personal fork"
 __all__ = [
     "FastMCP",
     "tool",
@@ -27,4 +29,5 @@ __all__ = [
     "ResourceError",
     "PromptError",
     "__version__",
+    "__author__",
 ]
