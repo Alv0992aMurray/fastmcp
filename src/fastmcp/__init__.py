@@ -1,6 +1,10 @@
 """FastMCP - A fast, Pythonic interface for the Model Context Protocol.
 
 This is a fork of PrefectHQ/fastmcp with additional features and improvements.
+
+Fork notes:
+- Tracking upstream: https://github.com/PrefectHQ/fastmcp
+- Added PromptError to public exceptions for consistency with ToolError/ResourceError
 """
 
 from fastmcp.server import FastMCP
@@ -8,7 +12,7 @@ from fastmcp.tools import tool
 from fastmcp.resources import resource
 from fastmcp.prompts import prompt
 from fastmcp.context import Context
-from fastmcp.exceptions import FastMCPError, ToolError, ResourceError
+from fastmcp.exceptions import FastMCPError, ToolError, ResourceError, PromptError
 
 __version__ = "0.1.0"
 __all__ = [
@@ -20,4 +24,5 @@ __all__ = [
     "FastMCPError",
     "ToolError",
     "ResourceError",
+    "PromptError",
 ]
